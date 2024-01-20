@@ -9,4 +9,4 @@ app.include_router(extract_router)
 
 @app.get("/")
 async def root():
-    return {"message": "Server is running."}
+    return {"message": "Server is running"}
