@@ -1,6 +1,6 @@
 from io import BytesIO
 
-from fastapi import APIRouter, File, HTTPException, UploadFile
+from fastapi import APIRouter, HTTPException, UploadFile
 
 from ..color_extractor import extract_hsl_colors, extract_rgb_colors
 
