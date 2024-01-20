@@ -11,20 +11,23 @@ type RGBColor = {
 const initialColors = [...Array(5)].map(() => ({ r: 244, g: 244, b: 245 }))
 
 const colors = ref<RGBColor[]>(initialColors)
+const loading = ref<boolean>(false)
 
 const fileInputRef = ref<HTMLInputElement>()
 
-const { isOverDropZone } = useDropZone(fileInputRef, {
+useDropZone(fileInputRef, {
   onDrop: handleDrop,
   dataTypes: ['image/jpg', 'image/jpeg', 'image/png']
 })
 
 async function uploadFileToServer(formData: FormData) {
+  loading.value = true
   const response = await fetch('http://127.0.0.1:8000/extract/rgb', {
     method: 'POST',
     body: formData
   })
   colors.value = await response.json()
+  loading.value = false
 }
 
 async function handleDrop(files: File[] | null) {
@@ -55,7 +58,7 @@ async function handleChange(event: Event) {
     >
       <div class="w-8 h-8 mx-auto">
         <svg
-          v-if="isOverDropZone"
+          v-if="loading"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
@@ -68,7 +71,7 @@ async function handleChange(event: Event) {
           />
         </svg>
         <svg
-          v-else="isOverDropZone"
+          v-else="loading"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
