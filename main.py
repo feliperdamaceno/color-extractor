@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from api.routers.extract import router as extract_router
 
 app = FastAPI()
 
-CORS_ALLOWED_ORIGINS = ["*"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -15,9 +16,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(extract_router)
+app.include_router(prefix="/api", router=extract_router)
 
 
-@app.get("/")
-async def root():
-    return {"message": "Server is running"}
+@app.get("/api")
+async def api():
+    return {"message": "API is running"}
+
+
+app.mount("/", StaticFiles(directory="./client/static", html=True), name="static")
