@@ -1,22 +1,14 @@
 <script setup lang="ts">
-import { RGBColor, HSLColor } from '../types'
-import { RGBTile, HSLTile } from '../components'
-
-import { useColorExtractor } from '../composables'
-const { colorScheme } = useColorExtractor()
+import type { RGBColor } from '../types'
+import { RGBTile } from '../components'
 
 defineProps<{
-  colors: RGBColor | HSLColor[]
+  colors: RGBColor[]
 }>()
 </script>
 
 <template>
   <div class="grid grid-cols-5 gap-2">
-    <RGBTile
-      v-if="colorScheme == 'rgb'"
-      v-for="color in colors"
-      :color="color"
-    />
-    <HSLTile v-else v-for="color in colors" :color="color" />
+    <RGBTile v-for="color in colors" :color="color" />
   </div>
 </template>

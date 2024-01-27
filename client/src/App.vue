@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ImageExtrator, ColorGrid } from './components'
 import { useColorExtractor } from './composables'
+
 const { colors } = useColorExtractor()
 </script>
 

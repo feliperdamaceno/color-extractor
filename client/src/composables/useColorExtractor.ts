@@ -1,15 +1,15 @@
-import type { ColorScheme, RGBColor, HSLColor } from '../types'
 import { ref } from 'vue'
+import type { RGBColor } from '../types'
 
 const BASE_URL = 'http://127.0.0.1:8000/extract'
+const COLOR_SCHEME = 'rgb'
 
 const loading = ref<boolean>(false)
-const colors = ref<RGBColor | HSLColor[]>([])
-const colorScheme = ref<ColorScheme>('rgb')
+const colors = ref<RGBColor[]>([])
 
 async function extractColors(files: FormData) {
   loading.value = true
-  const response = await fetch(`${BASE_URL}/${colorScheme.value}`, {
+  const response = await fetch(`${BASE_URL}/${COLOR_SCHEME}`, {
     method: 'POST',
     body: files
   })
@@ -17,10 +17,6 @@ async function extractColors(files: FormData) {
   loading.value = false
 }
 
-function changeColorScheme(scheme: ColorScheme) {
-  colorScheme.value = scheme
-}
-
 export default function useColorExtractor() {
-  return { extractColors, loading, colors, changeColorScheme, colorScheme }
+  return { colors, loading, extractColors }
 }

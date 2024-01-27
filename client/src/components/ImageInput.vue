@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { LoadingIcon, PictureIcon } from '../assets'
 
-import { useDropZone } from '@vueuse/core'
 import { ref } from 'vue'
+import { useDropZone } from '@vueuse/core'
 
 const { handleSubmit } = defineProps<{
   handleSubmit: (files: FormData) => Promise<void>

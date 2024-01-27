@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useColorExtractor } from '../composables'
 import { ImageInput } from '../components'
+import { useColorExtractor } from '../composables'
 
 const { extractColors, loading } = useColorExtractor()
 </script>
