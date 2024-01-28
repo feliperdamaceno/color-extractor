@@ -24,4 +24,4 @@ async def api():
     return {"message": "API is running"}
 
 
-app.mount("/", StaticFiles(directory="./client/static", html=True), name="static")
+app.mount("/", StaticFiles(directory="static", html=True), name="static")

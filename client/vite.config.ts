@@ -13,7 +13,7 @@ export default defineConfig({
     port: 3000
   },
   build: {
-    outDir: 'static',
+    outDir: '../static',
     rollupOptions: {
       output: {
         entryFileNames: 'assets/[name].js',
